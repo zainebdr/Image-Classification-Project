@@ -17,16 +17,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
 
-drive_path = 'dataset'
-folders = [f for f in os.listdir(drive_path) if os.path.isdir(os.path.join(drive_path, f))]
-print("Folders in your Drive:")
-for folder in folders:
-    print(folder)
 
 dataset_path = 'dataset'
 num_classes = len(os.listdir(dataset_path))
-# Define the coditions based on folder names
-conditions = os.listdir(dataset_path)
 
 #Fonction qui va être appelé pour effectuer la prediction
 def effectuer_predictions(model, test_data, test_labels_encoded):
@@ -53,7 +46,7 @@ channels=3
 model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(img_width, img_height, channels)))
 # Caractéristiques extraites : bords, contours, textures élémentaires
 
-# Première couche de pooling (MaxPooling2D) avec une fenêtre de pooling de taille 2x2
+# Première couche de pooling avec une fenêtre de pooling de taille 2x2
 model.add(MaxPooling2D((2, 2)))
 # Réduction de la dimensionnalité des caractéristiques extraites
 
@@ -61,7 +54,7 @@ model.add(MaxPooling2D((2, 2)))
 model.add(Conv2D(64, (3, 3), activation='relu'))
 # Caractéristiques extraites : motifs détaillés, structures anatomiques spécifiques
 
-# Deuxième couche de pooling (MaxPooling2D) avec une fenêtre de pooling de taille 2x2
+# Deuxième couche de pooling avec une fenêtre de pooling de taille 2x2
 model.add(MaxPooling2D((2, 2)))
 # Réduction supplémentaire de la dimensionnalité des caractéristiques extraites
 
@@ -69,7 +62,7 @@ model.add(MaxPooling2D((2, 2)))
 model.add(Conv2D(128, (3, 3), activation='relu'))
 # Caractéristiques extraites : caractéristiques plus abstraites, motifs plus complexes
 
-# Troisième couche de pooling (MaxPooling2D) avec une fenêtre de pooling de taille 2x2
+# Troisième couche de pooling avec une fenêtre de pooling de taille 2x2
 model.add(MaxPooling2D((2, 2)))
 # Réduction finale de la dimensionnalité des caractéristiques extraites
 
@@ -110,7 +103,6 @@ train_data, test_data, train_labels, test_labels = train_test_split(images, labe
 # Affichage du nombre d'images dans les ensembles d'entraînement et de test
 print(f"Nombre d'images dans l'ensemble d'entraînement : {len(train_data)}")
 print(f"Nombre d'images dans l'ensemble de test : {len(test_data)}")
-
 
 
 # Prétraitement des étiquettes (encodage en valeurs numériques)
